@@ -1,0 +1,21 @@
+.login-button{
+  background-color: #00a4f5;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+.login-button:hover{
+	background-color:#006cb6 !important;
+}
+.links-propios{
+	color: #636b6f;
+    padding: 0 25px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
