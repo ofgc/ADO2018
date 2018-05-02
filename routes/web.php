@@ -19,8 +19,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/registrarRoles','RoleController@index');
+Route::get('/registrarRoles','RoleController@create');
 
-Route::get('/gestionUsuarios', 'UserController@index');
+//Datatable functions
 
-Route::get('/gestionUsuariosTable', 'UserController@show')->name('datatable.pepe');
+Route::get('/datatables', 'DatatablesController@index');
+
+	//ajax Datatable functions
+
+	Route::get('/datatablesdata', 'DatatablesController@getDatos' ) -> name ('usuarios');
+
+	Route::post('/eliminar-usuario', 'DatatablesController@deleteRow')->name('borrarUser');

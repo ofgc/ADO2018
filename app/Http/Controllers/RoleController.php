@@ -16,10 +16,9 @@ class RoleController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(request $request)
+    public function index()
     {
-        $request->user()->authorizeRoles(['admin']);
-        return view('roles.create');
+       //
     }
 
     /**
@@ -27,9 +26,10 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(request $request)
     {
-        //
+        $request->user()->authorizeRoles(['admin']);
+        return view('roles.create');
     } 
 
     /**

@@ -25,11 +25,6 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
-
-    <!--Datatable assets-->
-    <!--<link rel="stylesheet" href="css/bootstrap3.css">-->
-    <link rel="stylesheet" href="css/dataTables.bootstrap.css">
-    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
     
 
 </head>
@@ -109,10 +104,8 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ asset('js/jquery-3.2.1.min.js') }}" defer></script>
-    <script src="{{ asset('https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js') }}" defer></script>
+    {{-- <script src="{{ asset('https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js') }}" defer></script> --}}
     <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
     
-    <script src="js/jquery.dataTables.min.js"></script>
-    <script src="js/dataTables.bootstrap.min.js"></script>
-	  </body>
+	</body>
 </html>

@@ -1,0 +1,11 @@
+.alineado_centro{
+	text-align:center;
+}
+
+.alineado_imagen_centro{
+	display:inline-block;
+	margin-left:18%;
+}
+table tfoot {
+display: table-header-group;
+}
