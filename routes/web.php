@@ -21,12 +21,22 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/registrarRoles','RoleController@create');
 
-//Datatable functions
+//Datatable functions 
 
-Route::get('/datatables', 'DatatablesController@index');
+//Datatable User
 
-	//ajax Datatable functions
+	Route::get('/gestionUsers', 'UserController@show');
 
-	Route::get('/datatablesdata', 'DatatablesController@getDatos' ) -> name ('usuarios');
+		//ajax Datatable functions
 
-	Route::post('/eliminar-usuario', 'DatatablesController@deleteRow')->name('borrarUser');
+		Route::get('/datatablesUserData', 'UserController@getDatosUser' );
+
+		Route::post('/eliminarUsuario', 'UserController@deleteUser');
+
+//Datatable Rol
+	
+	Route::get('/gestionRoles', 'RoleController@show');
+
+		Route::get('/datatablesRolesData', 'RoleController@getDatosRoles');
+
+		Route::get('/eliminarRoles', 'RoleController@eliminarRoles');

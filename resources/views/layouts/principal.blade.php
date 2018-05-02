@@ -2,30 +2,31 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
 	<meta name="description" content="">
-	
 	<meta name="author" content="">
 	
-	<link rel="icon" href="images/favicon.ico">
+	<link rel="icon" href="favicon.ico">
 	
 	<title>Medialoot Bootstrap 4 Dashboard Template</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> --}}
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.0.0/dt-1.10.16/r-2.2.1/datatables.min.css"/>
 
     <!--Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i' rel="stylesheet" type="text/css">
 
     <!-- Icons -->
-    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fontawesome/fontawesome-all.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
     
+    {{-- css Datatable --}}
+    <link href="{{ asset('css/datatable/styledatatable.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -49,8 +50,9 @@
 
 					<ul class="nav nav-pills flex-column sidebar-nav">
 						<li class="nav-item"><a class="nav-link" href="{{('register')}}"><em class="fa fa-user-circle-o"></em> Dar Alta Usuario</a></li>
-						<li class="nav-item"><a class="nav-link" href="{{('gestionUsuarios')}}"><em class="fa fa-users"></em> Gestión Usuario</a></li>
-						<li class="nav-item"><a class="nav-link" href="{{('registrarRoles')}}{{-- URL::roles.create --}}"><em class="fa fa-vcard"></em> Gestión de Roles</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('gestionUsers')}}"><em class="fa fa-users"></em> Gestión Usuario</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('registrarRoles')}}"><em class="fa fa-vcard"></em> Dar Rol de Alta</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('gestionRoles')}}"><em class="fa fa-vcard"></em>Gestión Roles</a></li>
 					</ul>
 				@endif
 
@@ -62,7 +64,7 @@
 			</nav>
 			
 			<main class="col-xs-12 col-sm-8 offset-sm-4 col-lg-9 offset-lg-3 col-xl-10 offset-xl-2 pt-3 pl-4">
-				<header class="page-header row justify-center">
+				<header class="page-header row justify-center position_fixed">
 					<div class="col-md-6 col-lg-8" >
 						<h1 class="float-left text-center text-md-left">Dashboard</h1>
 					</div>
@@ -93,9 +95,9 @@
 					
 					<div class="clear"></div>
 				</header>
-
+				<div class="container">
 				@yield('content')
-
+				</div>
 			</main>	
 		</div>
 	</div>
@@ -103,9 +105,13 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{{ asset('js/jquery-3.2.1.min.js') }}" defer></script>
+    <script src="//code.jquery.com/jquery.js"></script>	
+    <script src="{{ asset('js/jquery/jquery-3.2.1.min.js') }}" ></script>
     {{-- <script src="{{ asset('https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js') }}" defer></script> --}}
-    <script src="{{ asset('js/bootstrap.min.js') }}" defer></script>
-    
+    <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.0.0/dt-1.10.16/r-2.2.1/datatables.min.js"></script>
+	<script src="{{ asset('js/datatable/scriptDatatable.js') }}"></script>
+	@stack('scripts')
 	</body>
 </html>

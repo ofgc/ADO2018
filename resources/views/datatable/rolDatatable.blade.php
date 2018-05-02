@@ -1,13 +1,13 @@
-@extends('layouts.datatable')
+@extends('layouts.principal')
 
 @section('content')
     
-        <table class="table table-bordered table-striped" id="users-table">
+        <table class="table table-bordered table-striped" id="roles-table">
             <thead >
                 <tr class="table-primary alineado_centro">
                     <th class="all">Id</th>
                     <th class="all">Nombre</th>
-                    <th>Email</th>
+                    <th>descripción</th>
                     <th>Creado</th>
                     <th>Modificado</th>
                     <th class="all">Acciones</th>
@@ -24,23 +24,7 @@
                     <td class="non_searchable"></td>
                 </tr>
             </tfoot>
-        </table>
-        <div class="modal fade" id="update">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        </button>
-                        <h4>Modal Test</h4>
-                    </div>
-                    <div class="modal-body">
-                        ...
-                    </div>
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-primary" value="haz click">
-                    </div>
-                </div>
-            </div>
-        </div>      
+        </table> 
         {{-- @include('update') --}}
         <div id="alert" class="alert alert-success"></div>
 @stop

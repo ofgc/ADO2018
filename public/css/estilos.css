@@ -22,3 +22,6 @@
 .inline-important{
     display:inline !important;
 }
+.position_fixed{
+    display:fixed;
+}

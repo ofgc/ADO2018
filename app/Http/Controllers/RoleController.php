@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Role;
+use Yajra\Datatables\Datatables;
 
 class RoleController extends Controller
 {
@@ -49,11 +51,35 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        return view('datatable.rolDatatable');
     }
 
+    public function getDatosRoles()
+    {   
+        return Datatables::of(Role::query())
+            ->addColumn('action', function ($rol) {
+                            return '<a  id-delete='.$rol->id.' href="#delete-rol" class="btn-delete alineado_imagen_centro"><i class="fa fa-trash"></i></a>';
+                        })
+            ->make(true);
+    }
+
+    public function deleteRoles(Request $request)
+    {
+        var_dump("Hola");
+        if($request->ajax()){
+            $idUser=$request->input('idRol');
+            $user = User::find($idUser);
+            $user->delete();
+            $user_total = User::all()->count();
+
+            return response()->json([
+                'total'=> $user_total,
+                'message'=> $user->name . '  fue eliminado correctamente'
+            ]);
+        }else return "esto no es ajax";
+    }
     /**
      * Show the form for editing the specified resource.
      *

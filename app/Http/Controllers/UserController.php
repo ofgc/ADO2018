@@ -47,14 +47,36 @@ class UserController extends Controller
      */
     public function show()
     {
-         $tasks = User::select(['id','name','username','email']);
- 
-        //var_dump($tasks);
-        return Datatables::of($tasks)
- 
+         return view('datatable.userDatatable');
+    }
+
+    public function getDatosUser()
+    {   
+        return Datatables::of(User::query())
+            ->addColumn('action', function ($user) {
+                
+                            return '
+                                <a  id-delete='.$user->id.' href="#delete-user" class="btn-delete alineado_imagen_centro"><i class="fa fa-trash"></i> </a>
+                                <a  id-edit='.$user->id.' href="#update-user"class="btn-update alineado_imagen_centro" data-toggle="modal" data-target="#update"><i class="fa fa-edit"></i></a>
+                                    ';                          
+                        })
             ->make(true);
     }
 
+    public function deleteUser(Request $request)
+    {
+        if($request->ajax()){
+            $idUser=$request->input('idUser');
+            $user = User::find($idUser);
+            $user->delete();
+            $user_total = User::all()->count();
+
+            return response()->json([
+                'total'=> $user_total,
+                'message'=> $user->name . '  fue eliminado correctamente'
+            ]);
+        }else return "esto no es ajax";
+    }
     /**
      * Show the form for editing the specified resource.
      *
