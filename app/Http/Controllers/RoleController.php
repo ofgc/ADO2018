@@ -53,6 +53,7 @@ class RoleController extends Controller
      */
     public function show()
     {
+        $request->user()->authorizeRoles(['admin']);
         return view('datatable.rolDatatable');
     }
 
@@ -67,7 +68,6 @@ class RoleController extends Controller
 
     public function deleteRoles(Request $request)
     {
-        var_dump("Hola");
         if($request->ajax()){
             $idUser=$request->input('idRol');
             $user = User::find($idUser);

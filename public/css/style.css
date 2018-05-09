@@ -165,11 +165,11 @@ p {
   color: #fff; }
 
 .btn {
-  border-radius: 499rem;
+  /*border-radius: 499rem;*/
   text-transform: uppercase;
   letter-spacing: .1rem;
   font-size: .8rem;
-  padding: .75rem 1.25rem;
+  /*padding: .75rem 1.25rem;*/
   cursor: pointer; }
 
 .btn:focus {
@@ -183,7 +183,8 @@ p {
 
 .btn-sm {
   font-size: .7rem;
-  padding: .5rem 1rem; }
+  /*padding: .5rem 1rem; }*/
+}
 
 .btn-md {
   font-size: .8rem;
@@ -326,9 +327,9 @@ p {
   list-style: none; }
 
 .alert {
-  color: #fff; }
+  /*color: #fff;*/ }
   .alert a {
-    color: #fff !important; }
+    color: #fff; }
 
 .no-left-margin {
   margin-left: 0; }

@@ -12,15 +12,18 @@
 	<title>Medialoot Bootstrap 4 Dashboard Template</title>
 
     <!-- Bootstrap core CSS -->
-    {{-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/css_bootstrap/bootstrap.min.css') }}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.0.0/dt-1.10.16/r-2.2.1/datatables.min.css"/>
 
     <!--Fonts-->
     <link href='https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i' rel="stylesheet" type="text/css">
 
+    {{-- fileinput --}}
+    <link href="{{ asset('css/fileinput/fileinput.css') }}" media="all" rel="stylesheet" type="text/css"/>  
+    <link href="{{ asset('css/fileinput/fileinput-rtl.css') }}" rel="stylesheet">
+
     <!-- Icons -->
     <link href="{{ asset('css/fontawesome/fontawesome-all.min.css') }}" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
@@ -43,6 +46,14 @@
 					<li class="nav-item"><a class="nav-link" href="{{('informes')}}"><em class="fa fa-hand-o-up"></em>Buscar ADO</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{('buscarAdo')}}"><em class="fa fa-clone"></em>Informes</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{('graficos')}}"><em class="fa fa-bar-chart"></em> Gráficos</a></li>
+				</ul>
+
+				<h1 class="site-title"><a href="index.html"><em class=""></em> Rincón del usuario</a></h1>
+				
+				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
+				
+				<ul class="nav nav-pills flex-column sidebar-nav">
+					<li class="nav-item"><a class="nav-link" href="{{('profile')}}"><em class="fa fa-dashboard"></em> Perfil de usuario <span class="sr-only">(current)</span></a></li>
 				</ul>
 
 				@if(Auth::user()->hasRole('admin'))
@@ -69,8 +80,13 @@
 						<h1 class="float-left text-center text-md-left">Dashboard</h1>
 					</div>
 					<div class="dropdown user-dropdown col-md-6 col-lg-4 text-center text-md-right"><a class="btn btn-stripped dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img src="images/profile-pic.jpg" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
-						
+
+						@if(file_exists("storage/uploads/usuarios/".Auth::user()->username."/"))
+							<img src="storage/uploads/usuarios/{{ Auth::user()->username }}/imagenPerfil.png" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
+						@else
+							<img src="images/profile-pic.jpg" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
+						@endif
+
 						<div class="username mt-1">
 							
 							<h4 class="mb-1">{{ Auth::user()->name }}</h4>
@@ -79,7 +95,7 @@
 						</div>
 						</a>
 						
-						<div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="#"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
+						<div class="dropdown-menu dropdown-menu-right" style="margin-right: 1.5rem;" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="{{('profile')}}"><em class="fa fa-user-circle mr-1"></em> View Profile</a>
 						     <a class="dropdown-item" href="#"><em class="fa fa-sliders mr-1"></em> Preferences</a>
 						     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -108,10 +124,27 @@
     <script src="//code.jquery.com/jquery.js"></script>	
     <script src="{{ asset('js/jquery/jquery-3.2.1.min.js') }}" ></script>
     {{-- <script src="{{ asset('https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js') }}" defer></script> --}}
-    <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+    <script src="{{asset ('https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js') }}"></script>
+    <script src="{{ asset('js/js_bootstrap/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-flash-1.5.1/b-html5-1.5.1/r-2.2.1/datatables.min.js"></script>
 
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.0.0/dt-1.10.16/r-2.2.1/datatables.min.js"></script>
+	
+    
+
 	<script src="{{ asset('js/datatable/scriptDatatable.js') }}"></script>
+	<script src="{{ asset('js/moment/moment-with-locales.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/validate/validate.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/validate/additional-methods.js') }}" type="text/javascript"></script>
+	
+	<script src="{{ asset('js/ado2018.js') }}" type="text/javascript"></script>
+
+	{{-- //Fileinput --}}
+	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/themes/fa/theme.js" type="text/javascript"></script> --}}
+    <script src="{{ asset('js/fileinput.min.js') }}" type="text/javascript"></script>.
+    <script src="{{ asset('js/themes/fas/theme.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/locales/es.js') }}" type="text/javascript"></script>
+
 	@stack('scripts')
 	</body>
 </html>

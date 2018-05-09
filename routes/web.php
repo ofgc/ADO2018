@@ -33,6 +33,18 @@ Route::get('/registrarRoles','RoleController@create');
 
 		Route::post('/eliminarUsuario', 'UserController@deleteUser');
 
+		Route::post('/updateUsuario', 'UserController@updateUser');
+
+//Profile User
+
+	Route::get('/profile', 'UserController@user_profile');
+
+		//ajax functions
+
+	Route::post('/actualizarProfile', 'UserController@user_profileUpdate')->name("actualizarProfile");
+
+		
+
 //Datatable Rol
 	
 	Route::get('/gestionRoles', 'RoleController@show');
@@ -40,3 +52,5 @@ Route::get('/registrarRoles','RoleController@create');
 		Route::get('/datatablesRolesData', 'RoleController@getDatosRoles');
 
 		Route::get('/eliminarRoles', 'RoleController@eliminarRoles');
+
+

@@ -10,6 +10,12 @@
 .login-button:hover{
 	background-color:#006cb6 !important;
 }
+.margin-top{
+    margin-top: 10%;
+}
+.margin-left{
+    margin-left: 15%;
+}
 .links-propios{
 	color: #636b6f;
     padding: 0 25px;
@@ -24,4 +30,13 @@
 }
 .position_fixed{
     display:fixed;
+}
+.center_all{
+    text-align:center;
+}
+.margin_top_profile{
+    margin-top: 5%;
+}
+.noneDisplay{
+    display:none;
 }

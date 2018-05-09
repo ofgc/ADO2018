@@ -1,6 +1,6 @@
   $(document).ready(function(){
     $('#modal1_user').hide();
-    $('#users-table').DataTable({
+    var table = $('#users-table').DataTable({
 
         processing: true,
         serverSide: true,
@@ -48,7 +48,6 @@
                 var column = this;
                 var columnClass = column.footer().className;
                 if(columnClass != 'non_searchable'){
-                    // var input = document.createElement("input");
                     $('<input size="10%">').appendTo($(column.footer()).empty())
                     .on('keyup', function () {
                         column.search($(this).val(), false, false, true).draw();
@@ -57,6 +56,7 @@
             });
         }
     });
+
     $('#users-table').on( 'draw.dt', function () {
 
         ////////////---------DELETE--------------///////////////
@@ -87,16 +87,71 @@
         $('.btn-update').click(function(e){
             e.preventDefault();
             var row = $(this).parents('tr');
+            var id = row.find("td").eq(0).html();
             var nombre = row.find("td").eq(1).html();
             var username = row.find("td").eq(2).html();
             var email = row.find("td").eq(3).html();
-            $('#name_input').text(nombre);
-            $('#username_input').text(username);
-            $('#email_input').text(email);
-            $('#modal1_user').modal('show');
 
+            $('#id_user').val(id);
+            $('#name_update').val(nombre);
+            $('#username_update').val(username);
+            $('#email_update').val(email);
+            $('#modal1_user').modal('show');
         })
+
+        $("#update-form").validate({
+
+            rules: {
+                name_update : {required : true, lettersonly: true},
+                username_update : "required",
+                email_update : {required:true, email:true},
+                password_confirmation_update : { equalTo :"#password_update"}
+            },
+            messages: {
+                name_update: "Este campo no puede estar vacio o tener numeros",
+                username_update : "Este campo no puede estar vacio",
+                email_update: "Este campo no puede estar vacio y debe tener formato de email",
+                password_confirmation_update: "Las contraseñas no coinciden",
+            },
+            errorPlacement : function(error, element) { 
+                $(element).closest('.form-group').find('.help-block').html(error.html());
+            },
+            highlight : function(element) { 
+                $(element).closest('.form-group').removeClass('has-success').addClass('alert alert-danger');
+             },     
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).closest('.form-group').removeClass('alert alert-danger').addClass('has-success');
+                $(element).closest('.form-group').find('.help-block').html('');
+             }, 
+            submitHandler: function(form) {
+                var datos = $('#update-form').serialize();
+                // $.ajax({
+                //     headers: {
+                //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                //     },
+                //     type:'POST',
+                //     data : datos,
+                //     url: 'updateUsuario',
+                // })
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type:"POST",
+                    url : 'updateUsuario',
+                    dataType:"JSON",
+                    data : datos,
+                    success : function(data){    
+                        $("#alert").html(data.message);  
+                        $("#alert").show();
+                        $("#modal1_user").modal('toggle');
+                        table.draw();
+                    }
+                })
+            }                                
+        }) // cierra validate
     });
+
     $('#roles-table').DataTable({
 
         processing: true,
@@ -136,6 +191,7 @@
             { data: 'updated_at', name: 'updated_at', responsivePriority: 6, orderable: true, searchable: false },
             { data: 'action', name: 'action',responsivePriority: 4, orderable: false, searchable: false}
         ],
+ 
         
         initComplete: function () {
 
