@@ -21,9 +21,14 @@
     {{-- fileinput --}}
     <link href="{{ asset('css/fileinput/fileinput.css') }}" media="all" rel="stylesheet" type="text/css"/>  
     <link href="{{ asset('css/fileinput/fileinput-rtl.css') }}" rel="stylesheet">
+	
 
     <!-- Icons -->
     <link href="{{ asset('css/fontawesome/fontawesome-all.min.css') }}" rel="stylesheet">
+
+	{{-- Theme Fileinput --}}
+    <link href="{{ asset('css/themes/explorer-fa/theme.css') }}" media="all" rel="stylesheet" type="text/css"/>
+
     <!-- Custom styles for this template -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
@@ -123,14 +128,10 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="//code.jquery.com/jquery.js"></script>	
     <script src="{{ asset('js/jquery/jquery-3.2.1.min.js') }}" ></script>
-    {{-- <script src="{{ asset('https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js') }}" defer></script> --}}
+    
     <script src="{{asset ('https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js') }}"></script>
     <script src="{{ asset('js/js_bootstrap/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-flash-1.5.1/b-html5-1.5.1/r-2.2.1/datatables.min.js"></script>
-
-	
-    
-
 	<script src="{{ asset('js/datatable/scriptDatatable.js') }}"></script>
 	<script src="{{ asset('js/moment/moment-with-locales.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/validate/validate.min.js') }}" type="text/javascript"></script>
@@ -139,9 +140,8 @@
 	<script src="{{ asset('js/ado2018.js') }}" type="text/javascript"></script>
 
 	{{-- //Fileinput --}}
-	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/js/fileinput.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/themes/fa/theme.js" type="text/javascript"></script> --}}
-    <script src="{{ asset('js/fileinput.min.js') }}" type="text/javascript"></script>.
+	<script src="{{ asset('js/fileinput.min.js') }}" type="text/javascript"></script>
+	<script src="{{ asset('js/themes/explorer-fa/theme.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/themes/fas/theme.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/locales/es.js') }}" type="text/javascript"></script>
 

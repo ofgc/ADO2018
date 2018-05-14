@@ -51,7 +51,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(request $request)
     {
         $request->user()->authorizeRoles(['admin']);
         return view('datatable.rolDatatable');

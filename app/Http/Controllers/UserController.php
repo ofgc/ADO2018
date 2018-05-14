@@ -132,35 +132,39 @@ class UserController extends Controller
     }
 
     public function user_profileUpdate(){ 
-        if (empty($_FILES['images'])) {
-        //     // Devolvemos un array asociativo con la clave error en formato JSON como respuesta 
-            echo json_encode(['error'=>'ERROR, ha superado el tamaño maximo de ficheros, reduzca sus pdf o elimine algun fichero..']); 
-        //     // Cancelamos el resto del script 
-        }else{
-        $idUser= $_POST['idProfile'];
-        $username = $_POST['usernameProfile'];
-        $nombre = $_POST['nombreProfile'];
-        $password = $_POST['passwordProfile'];
-        $nombre_carpeta = "uploads/usuarios/".$username."/";
+        
+            $idUser= $_POST['idProfile'];
+            $username = $_POST['usernameProfile'];
+            $nombre = $_POST['nombreProfile'];
+            $email = $_POST['emailProfile'];
+            $password = $_POST['passwordProfile'];
+            $nombre_carpeta = "uploads/usuarios/".$username."/";
 
-        $files = Storage::files($nombre_carpeta);
-        Storage::delete($files);
 
-        foreach($_FILES['images']['error'] as $key => $error){
-            if($error == UPLOAD_ERR_OK){
-                $name = $_FILES['images']['name'][$key];
-                Storage::disk('public')->putFileAs($nombre_carpeta, new File($_FILES['images']['tmp_name'][$key]), 'imagenPerfil.png');
+        if (!empty($_FILES['images'])) {
+            $files = Storage::files($nombre_carpeta);
+            Storage::delete($files);
+            foreach($_FILES['images']['error'] as $key => $error){
+                if($error == UPLOAD_ERR_OK){
+                    $name = $_FILES['images']['name'][$key];
+                    Storage::disk('public')->putFileAs($nombre_carpeta, new File($_FILES['images']['tmp_name'][$key]), 'imagenPerfil.png');
+                }
             }
         }
-        $user = User::find($idUser);
-        $user->name = $nombre;
-        $user->username = $username;
-        $user->password = bcrypt($password);
-        $user->save();
-        echo json_encode("Todos los cambios guardados");
+            $user = User::find($idUser);
+            if($nombre){
+                $user->name = $nombre;
+            }
+            if($email){
+                $user->email=$email;
+            }
+            if($password){
+                $user->password = bcrypt($password);
+            }
+            $user->save();
+            echo json_encode("Todos los cambios guardados");
     }
 
-    }
     /**
      * Remove the specified resource from storage.
      *
