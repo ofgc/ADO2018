@@ -30,10 +30,24 @@ class RoleController extends Controller
      */
     public function create(request $request)
     {
-        $request->user()->authorizeRoles(['admin']);
+        $request->user()->authorizeRoles([1]);
         return view('roles.create');
     } 
 
+    public function createRol(Request $request){
+        if($request->ajax()){
+            $role = Role::create([
+                'name' => $request->input('nombre'),
+                'description' => $request->input('description'),
+                'level'=> $request->input('level'),
+            ]);
+            return response()->json([
+                    'message'=> $role->name. 'fue creado correctamente'
+            ]);     
+        }else return "esto no es ajax";
+    
+
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -53,7 +67,7 @@ class RoleController extends Controller
      */
     public function show(request $request)
     {
-        $request->user()->authorizeRoles(['admin']);
+        $request->user()->authorizeRoles([1]);
         return view('datatable.rolDatatable');
     }
 
@@ -61,7 +75,8 @@ class RoleController extends Controller
     {   
         return Datatables::of(Role::query())
             ->addColumn('action', function ($rol) {
-                            return '<a  id-delete='.$rol->id.' href="#delete-rol" class="btn-delete alineado_imagen_centro"><i class="fa fa-trash"></i></a>';
+                            return '<a  id-delete='.$rol->id.' href="#delete-rol" class="btn-delete alineado_imagen_centro"><i class="fa fa-trash"></i></a>
+                            <a  id-edit='.$rol->id.' href="#update-rol"class="btn-update alineado_imagen_centro" data-toggle="modal" data-target="#update"><i class="fa fa-edit"></i></a>';
                         })
             ->make(true);
     }
@@ -69,14 +84,12 @@ class RoleController extends Controller
     public function deleteRoles(Request $request)
     {
         if($request->ajax()){
-            $idUser=$request->input('idRol');
-            $user = User::find($idUser);
-            $user->delete();
-            $user_total = User::all()->count();
+            $idRol=$request->input('idRol');
+            $rol = Role::find($idRol);
+            $rol->delete();
 
             return response()->json([
-                'total'=> $user_total,
-                'message'=> $user->name . '  fue eliminado correctamente'
+                'message'=> $rol->name . '  fue eliminado correctamente'
             ]);
         }else return "esto no es ajax";
     }
@@ -98,9 +111,20 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if($request->ajax()){
+            $idRol = $request->input('id_rol_update');
+            $rol = Role::find($idRol);
+            $rol->name = $request->input('name_update');
+            $rol->description = $request->input('descripcion_update');
+            // var_dump($request->input('level_update'));die();
+            $rol->level = $request->input('level_update');
+            $rol->save();
+            return response()->json([
+                'message'=>'El rol fue actualizado correctamente'
+            ]);
+        }else return "esto no es ajax";
     }
 
     /**

@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index(request $request)
     {
-        $request->user()->authorizeRoles(['admin']);
+        $request->user()->authorizeRoles([1]);
             return view("usuarios.gestion");
     }
 
@@ -50,7 +50,7 @@ class UserController extends Controller
      */
     public function show(request $request)
     {
-        $request->user()->authorizeRoles(['admin']);
+        $request->user()->authorizeRoles([1]);
          return view('datatable.userDatatable');
     }
 

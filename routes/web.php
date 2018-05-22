@@ -51,6 +51,10 @@ Route::get('/registrarRoles','RoleController@create');
 
 		Route::get('/datatablesRolesData', 'RoleController@getDatosRoles');
 
-		Route::get('/eliminarRoles', 'RoleController@eliminarRoles');
+		Route::post('/eliminarRoles', 'RoleController@deleteRoles');
+
+		Route::post('/createRol', 'RoleController@createRol');
+
+		Route::post('/updateRol', 'RoleController@update');
 
 

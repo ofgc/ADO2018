@@ -1,5 +1,6 @@
   $(document).ready(function(){
     $('#modal1_user').hide();
+    $('#modal1_rol').hide();
     var table = $('#users-table').DataTable({
 
         processing: true,
@@ -59,7 +60,7 @@
 
     $('#users-table').on( 'draw.dt', function () {
 
-        ////////////---------DELETE--------------///////////////
+        ////////////---------DELETE USER--------------///////////////
         
         $(".btn-delete").click(function(e){
             e.preventDefault();
@@ -80,9 +81,12 @@
                 success:function(data){
                     row.fadeOut(); 
                     $('#alert').html(data.message);
+                    $("#alert").fadeToggle(5000);
                 }
             })
         })
+
+        ////////////---------UPDATE USER--------------///////////////
 
         $('.btn-update').click(function(e){
             e.preventDefault();
@@ -144,6 +148,7 @@
                     success : function(data){    
                         $("#alert").html(data.message);  
                         $("#alert").show();
+                        $("#alert").fadeToggle(5000);
                         $("#modal1_user").modal('toggle');
                         table.draw();
                     }
@@ -152,7 +157,9 @@
         }) // cierra validate
     });
 
-    $('#roles-table').DataTable({
+    ////////////---------TABLE Rol--------------///////////////
+
+    var table = $('#roles-table').DataTable({
 
         processing: true,
         serverSide: true,
@@ -187,6 +194,7 @@
             { data: 'id', name: 'id',  responsivePriority: 1, orderable: false, searchable: false },
             { data: 'name', name: 'name', responsivePriority: 2 },
             { data: 'description', name: 'description', responsivePriority: 3 },
+            { data: 'level', name: 'level', responsivePriority: 2},
             { data: 'created_at', name: 'created_at', responsivePriority: 5, orderable: true, searchable: false },
             { data: 'updated_at', name: 'updated_at', responsivePriority: 6, orderable: true, searchable: false },
             { data: 'action', name: 'action',responsivePriority: 4, orderable: false, searchable: false}
@@ -210,12 +218,12 @@
     });
     $('#roles-table').on( 'draw.dt', function () {
 
-        ////////////---------DELETE--------------///////////////
+        ////////////---------DELETE Rol--------------///////////////
         
         $(".btn-delete").click(function(e){
             e.preventDefault();
                                
-            if( ! confirm("¿Estas seguro de eliminar el usuario?"))return false;   
+            if( ! confirm("¿Estas seguro de eliminar el rol?"))return false;   
             var idRol = $(this).attr('id-delete');
             var row = $(this).parents('tr');
             $('#alert').show();
@@ -231,8 +239,67 @@
                 success:function(data){
                     row.fadeOut(); 
                     $('#alert').html(data.message);
+                    $("#alert").fadeToggle(5000);
                 }
             })
+        })
+
+        ////////////---------UPDATE Rol--------------///////////////
+
+        $('.btn-update').click(function(e){
+            e.preventDefault();
+            var row = $(this).parents('tr');
+            var id = row.find("td").eq(0).html();
+            var nombre = row.find("td").eq(1).html();
+            var descripcion = row.find("td").eq(2).html();
+            var level = row.find("td").eq(3).html();
+
+
+            $('#id_rol').val(id);
+            $('#name_update').val(nombre);
+            $('#descripcion_update').val(descripcion);
+            $('#level_update').val(level);
+            $('#modal1_rol').modal('show');
+        })
+        $("#update-form").validate({
+
+            rules: {
+                name_update : {required : true,  minlength: 4, lettersonly: true},
+                descripcion_update : {required:false, minlength: 4},
+            },
+            messages: {
+                name_update: "Este campo tiene que tener cuatro carácteres o tener numeros",
+                descripcion_update : "Este campo debe tener cuatro carácteres como minimo",
+            },
+            errorPlacement : function(error, element) { 
+                $(element).closest('.form-group').find('.help-block').html(error.html());
+            },
+            highlight : function(element) { 
+                $(element).closest('.form-group').removeClass('has-success').addClass('alert alert-danger');
+             },     
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).closest('.form-group').removeClass('alert alert-danger').addClass('has-success');
+                $(element).closest('.form-group').find('.help-block').html('');
+             }, 
+            submitHandler: function(form) {
+                var datos = $('#update-form').serialize();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type:"POST",
+                    url : 'updateRol',
+                    dataType:"JSON",
+                    data : datos,
+                    success : function(data){    
+                        $("#alert").html(data.message);  
+                        $("#alert").show();
+                        $("#alert").fadeToggle(5000);
+                        $("#modal1_rol").modal('toggle');
+                        table.draw();
+                    }
+                })
+            }                                
         })
     });
 })

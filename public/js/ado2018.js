@@ -54,6 +54,53 @@ $(document).ready(function(){
 
             $("#images_profile").fileinput('upload');
 
+    });
+
+    $('#form-roles').validate({
+    	rules: {
+                nombre: { required: true, minlength: 4, },
+                descripcion: { required:true, minlength: 4 },
+                level: { required:true,},
+            },
+            messages: {
+                nombre: "Este campo debe tener mas de 4 carácteres",
+                descripcion: "Este campo debe tener mas de 4 carácteres",
+                level: "Es necesario especificar el nivel de seguridad",
+            },
+
+            errorPlacement : function(error, element) { 
+                $(element).closest('.form-group').find('.help-block').html(error.html());
+            },
+            highlight : function(element) { 
+                $(element).closest('.form-group').removeClass('has-success').addClass('alert alert-danger');
+             },     
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).closest('.form-group').removeClass('alert alert-danger').addClass('has-success');
+                $(element).closest('.form-group').find('.help-block').html('');
+             }, 
+            submitHandler: function(form) {
+	 		// var datos = $('#form-roles').serialize();
+	 		var nombre = $('#nombre').val();
+	 		var description = $('#descripcion').val();
+	 		var level = $('#level').val();
+			$.ajax({
+	            url : 'createRol',
+	            headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                     },
+	            data : { nombre : nombre, description : description, level: level },
+	            type : 'POST',
+	            dataType : 'json',
+	            success : function(json) {
+	                //console.log("ajax success");
+	                var importe = json.toString();
+
+	                $("#alert_success").html();
+	                $("#alert_success").show();
+        			$("#alert_success").fadeToggle(5000);
+	            }            
+	        }) 
+		}
     }); 
 
 });

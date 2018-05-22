@@ -16,7 +16,7 @@
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.0.0/dt-1.10.16/r-2.2.1/datatables.min.css"/>
 
     <!--Fonts-->
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i' rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 
     {{-- fileinput --}}
     <link href="{{ asset('css/fileinput/fileinput.css') }}" media="all" rel="stylesheet" type="text/css"/>  
@@ -46,11 +46,11 @@
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				
 				<ul class="nav nav-pills flex-column sidebar-nav">
-					<li class="nav-item"><a class="nav-link" href="{{('home')}}"><em class="fa fa-dashboard"></em> Dashboard <span class="sr-only">(current)</span></a></li>
-					<li class="nav-item"><a class="nav-link" href="{{('crearAdo')}}"><em class="fa fa-calendar-o"></em> Crear ADO</a></li>
-					<li class="nav-item"><a class="nav-link" href="{{('informes')}}"><em class="fa fa-hand-o-up"></em>Buscar ADO</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{('home')}}"><em class="fa fa-newspaper"></em> Dashboard <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{{('crearAdo')}}"><em class="fa fa-edit"></em> Crear ADO</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{('informes')}}"><em class="fa fa-clone"></em>Buscar ADO</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{('buscarAdo')}}"><em class="fa fa-clone"></em>Informes</a></li>
-					<li class="nav-item"><a class="nav-link" href="{{('graficos')}}"><em class="fa fa-bar-chart"></em> Gráficos</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{('graficos')}}"><em class="fa fa-bar-chart-o"></em> Gráficos</a></li>
 				</ul>
 
 				<h1 class="site-title"><a href="index.html"><em class=""></em> Rincón del usuario</a></h1>
@@ -58,17 +58,17 @@
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				
 				<ul class="nav nav-pills flex-column sidebar-nav">
-					<li class="nav-item"><a class="nav-link" href="{{('profile')}}"><em class="fa fa-dashboard"></em> Perfil de usuario <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{{('profile')}}"><em class="fa fa-id-card"></em> Perfil de usuario <span class="sr-only">(current)</span></a></li>
 				</ul>
 
-				@if(Auth::user()->hasRole('admin'))
+				@if(Auth::user()->hasAnyRole([1]))
 					<h1 class="site-title"><a href="index.html"><em class=""></em> Menu Administrador</a></h1>
 
 					<ul class="nav nav-pills flex-column sidebar-nav">
-						<li class="nav-item"><a class="nav-link" href="{{('register')}}"><em class="fa fa-user-circle-o"></em> Dar Alta Usuario</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('register')}}"><em class="fa fa-user-circle"></em> Dar Alta Usuario</a></li>
 						<li class="nav-item"><a class="nav-link" href="{{('gestionUsers')}}"><em class="fa fa-users"></em> Gestión Usuario</a></li>
-						<li class="nav-item"><a class="nav-link" href="{{('registrarRoles')}}"><em class="fa fa-vcard"></em> Dar Rol de Alta</a></li>
-						<li class="nav-item"><a class="nav-link" href="{{('gestionRoles')}}"><em class="fa fa-vcard"></em>Gestión Roles</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('registrarRoles')}}"><em class="fa fa-th-large"></em> Dar Rol de Alta</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('gestionRoles')}}"><em class="fa fa-th-list"></em>Gestión Roles</a></li>
 					</ul>
 				@endif
 
@@ -89,7 +89,7 @@
 						@if(file_exists("storage/uploads/usuarios/".Auth::user()->username."/"))
 							<img src="storage/uploads/usuarios/{{ Auth::user()->username }}/imagenPerfil.png" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
 						@else
-							<img src="images/profile-pic.jpg" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
+							<img src="images/profile-pic.png" alt="profile photo" class="circle float-left profile-photo" width="50" height="auto">
 						@endif
 
 						<div class="username mt-1">
