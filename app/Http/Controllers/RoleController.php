@@ -30,8 +30,9 @@ class RoleController extends Controller
      */
     public function create(request $request)
     {
-        $request->user()->authorizeRoles([1]);
-        return view('roles.create');
+        if($request->user()->authorizeRoles([1])){
+            return view('roles.create');
+        }else abort(401, 'Esta acción no está autorizada.');
     } 
 
     public function createRol(Request $request){
@@ -67,8 +68,10 @@ class RoleController extends Controller
      */
     public function show(request $request)
     {
-        $request->user()->authorizeRoles([1]);
-        return view('datatable.rolDatatable');
+        if($request->user()->authorizeRoles([1])){
+            return view('datatable.rolDatatable');
+        }else abort(401, 'Esta acción no está autorizada.');
+        
     }
 
     public function getDatosRoles()
@@ -118,7 +121,6 @@ class RoleController extends Controller
             $rol = Role::find($idRol);
             $rol->name = $request->input('name_update');
             $rol->description = $request->input('descripcion_update');
-            // var_dump($request->input('level_update'));die();
             $rol->level = $request->input('level_update');
             $rol->save();
             return response()->json([

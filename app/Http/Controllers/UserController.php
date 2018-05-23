@@ -15,10 +15,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    { 
+        $this->middleware('auth');
+    }
+
     public function index(request $request)
     {
-        $request->user()->authorizeRoles([1]);
+        if($request->user()->authorizeRoles([1])){
             return view("usuarios.gestion");
+        }else abort(401, 'Esta acción no está autorizada.');
     }
 
     /**
@@ -50,8 +57,10 @@ class UserController extends Controller
      */
     public function show(request $request)
     {
-        $request->user()->authorizeRoles([1]);
+
+        if($request->user()->authorizeRoles([1])){
          return view('datatable.userDatatable');
+        }else  abort(401, 'Esta acción no está autorizada.');
     }
 
     public function getDatosUser()
@@ -128,7 +137,8 @@ class UserController extends Controller
     }
 
     public function user_profile(){
-        return view('user.profile');
+        
+            return view('user.profile');
     }
 
     public function user_profileUpdate(){ 

@@ -45,7 +45,7 @@
 				
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				
-				<ul class="nav nav-pills flex-column sidebar-nav">
+				<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
 					<li class="nav-item"><a class="nav-link" href="{{('home')}}"><em class="fa fa-newspaper"></em> Dashboard <span class="sr-only">(current)</span></a></li>
 					<li class="nav-item"><a class="nav-link" href="{{('crearAdo')}}"><em class="fa fa-edit"></em> Crear ADO</a></li>
 					<li class="nav-item"><a class="nav-link" href="{{('informes')}}"><em class="fa fa-clone"></em>Buscar ADO</a></li>
@@ -57,14 +57,24 @@
 				
 				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
 				
-				<ul class="nav nav-pills flex-column sidebar-nav">
+				<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
 					<li class="nav-item"><a class="nav-link" href="{{('profile')}}"><em class="fa fa-id-card"></em> Perfil de usuario <span class="sr-only">(current)</span></a></li>
 				</ul>
+
+				@if(Auth::user()->hasAnyRole([1,2,3]))
+					<h1 class="site-title"><a href="index.html"><em class=""></em> Menu gestión</a></h1>
+
+					<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
+						<li class="nav-item"><a class="nav-link" href="{{('register')}}"><em class="fa fa-user-circle"></em>Alta descripción</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('gestionUsers')}}"><em class="fa fa-users"></em>Gestión descripción</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('registrarRoles')}}"><em class="fa fa-th-large"></em>Gestión presupuesto</a></li>
+					</ul>
+				@endif
 
 				@if(Auth::user()->hasAnyRole([1]))
 					<h1 class="site-title"><a href="index.html"><em class=""></em> Menu Administrador</a></h1>
 
-					<ul class="nav nav-pills flex-column sidebar-nav">
+					<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
 						<li class="nav-item"><a class="nav-link" href="{{('register')}}"><em class="fa fa-user-circle"></em> Dar Alta Usuario</a></li>
 						<li class="nav-item"><a class="nav-link" href="{{('gestionUsers')}}"><em class="fa fa-users"></em> Gestión Usuario</a></li>
 						<li class="nav-item"><a class="nav-link" href="{{('registrarRoles')}}"><em class="fa fa-th-large"></em> Dar Rol de Alta</a></li>

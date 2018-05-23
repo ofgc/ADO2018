@@ -46,7 +46,7 @@ class RegisterController extends Controller
 
      public function showRegistrationForm(Request $request)
     {
-        $request->user()->authorizeRoles('admin');
+        $request->user()->authorizeRoles(1);
 
          $roles = DB::table('roles')->get();
 
