@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use App\User;
+use App\Role;
+use DB;
 use Illuminate\Support\Facades\Storage;
 use Yajra\Datatables\Datatables;
 
@@ -23,6 +25,7 @@ class UserController extends Controller
 
     public function index(request $request)
     {
+
         if($request->user()->authorizeRoles([1])){
             return view("usuarios.gestion");
         }else abort(401, 'Esta acción no está autorizada.');
@@ -57,14 +60,17 @@ class UserController extends Controller
      */
     public function show(request $request)
     {
-
+        var_dump($request->user()->departaments()->get());die();
+        $departamentos = DB::table('departaments')->get();
+        $roles = DB::table('roles')->get();
         if($request->user()->authorizeRoles([1])){
-         return view('datatable.userDatatable');
+         return view('datatable.userDatatable', ['roles'=> $roles, 'departamentos'=> $departamentos]);
         }else  abort(401, 'Esta acción no está autorizada.');
     }
 
     public function getDatosUser()
     {   
+
         return Datatables::of(User::query())
             ->addColumn('action', function ($user) {
                 
@@ -73,6 +79,15 @@ class UserController extends Controller
                                 <a  id-edit='.$user->id.' href="#update-user"class="btn-update alineado_imagen_centro" data-toggle="modal" data-target="#update"><i class="fa fa-edit"></i></a>
                                     ';                          
                         })
+            ->addColumn('rol',function($user){
+                $object = ($user->roles()->first()['name']);
+                return $object;
+            })
+            // ->addColumn('departament',function($user){
+                // $departament = ($user->departaments()['name']);
+                // var_dump($departament)
+                // return $depart;
+            // })
             ->editColumn('updated_at', function ($user) {
                 return $user->updated_at->format('m/d/Y');
             })
@@ -120,11 +135,13 @@ class UserController extends Controller
         
         if($request->ajax()){
             $password_update = bcrypt($request-> input('password_update'));
+            $rol = $request->input('roles');
             $idUser = $request->input('id_user_update');
             $user = User::find($idUser);
             $user->name = $request->input('name_update');
             $user->username = $request->input('username_update');
             $user->email = $request->input('email_update');
+            $user->roles()->attach(Role::where('name', $rol)->first());
             if($password_update != "" || $password_update != null ){
                 $user->password = $password_update;
             }

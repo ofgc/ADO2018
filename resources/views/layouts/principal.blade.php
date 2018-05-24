@@ -15,6 +15,9 @@
     <link href="{{ asset('css/css_bootstrap/bootstrap.min.css') }}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.0.0/dt-1.10.16/r-2.2.1/datatables.min.css"/>
 
+		{{-- bootStrap - Select Plugin --}}
+		<link href="{{ asset('css/bootstrap_select/bootstrap-multiselect.css') }}" rel="stylesheet">
+
     <!--Fonts-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
 
@@ -105,7 +108,6 @@
 						<div class="username mt-1">
 							
 							<h4 class="mb-1">{{ Auth::user()->name }}</h4>
-							
 							<h6 class="text-muted">{{Auth::user()->name}}</h6>
 						</div>
 						</a>
@@ -136,24 +138,41 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+
+    {{-- Jquery --}}
     <script src="//code.jquery.com/jquery.js"></script>	
     <script src="{{ asset('js/jquery/jquery-3.2.1.min.js') }}" ></script>
     
+    {{-- tether --}}
     <script src="{{asset ('https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js') }}"></script>
+
+    {{-- bootstrap --}}
     <script src="{{ asset('js/js_bootstrap/bootstrap.min.js') }}"></script>
+
+	    {{-- bootStrap - Select Plugin --}}
+		<script src="{{ asset('js/bootstrap_select/bootstrap-multiselect.js') }}"></script>
+
+    {{-- Datatable --}}
 	<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-flash-1.5.1/b-html5-1.5.1/r-2.2.1/datatables.min.js"></script>
 	<script src="{{ asset('js/datatable/scriptDatatable.js') }}"></script>
+
+	{{-- moment Plugin --}}
 	<script src="{{ asset('js/moment/moment-with-locales.js') }}" type="text/javascript"></script>
+
+	{{-- validate Plugin --}}
 	<script src="{{ asset('js/validate/validate.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('js/validate/additional-methods.js') }}" type="text/javascript"></script>
 	
+	{{-- js Propio ado --}}
 	<script src="{{ asset('js/ado2018.js') }}" type="text/javascript"></script>
 
 	{{-- //Fileinput --}}
 	<script src="{{ asset('js/fileinput.min.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('js/themes/explorer-fa/theme.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('js/themes/fas/theme.js') }}" type="text/javascript"></script>
-	<script src="{{ asset('js/locales/es.js') }}" type="text/javascript"></script>
+
+		{{-- Themes/idioma Fileinput --}}
+		<script src="{{ asset('js/themes/explorer-fa/theme.js') }}" type="text/javascript"></script>
+	    <script src="{{ asset('js/themes/fas/theme.js') }}" type="text/javascript"></script>
+		<script src="{{ asset('js/locales/es.js') }}" type="text/javascript"></script>
 
 	@stack('scripts')
 	</body>

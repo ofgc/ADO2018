@@ -1,6 +1,9 @@
 $(document).ready(function(){
 	$("#alert_fail").hide();
 	$("#alert_success").hide();
+
+	$('#departamentos_update').multiselect({});
+
 	$("#images_profile").fileinput({
 	    theme: 'explorer-fa',
 	    language: 'es',  

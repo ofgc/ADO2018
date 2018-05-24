@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Role;
+use App\Departament;
 
 class User extends Authenticatable
 {
@@ -27,6 +28,15 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //establecimiento de la relacion de muchos a muchos con departamentos
+    public function departaments()
+    {
+        return $this
+            ->belongsToMany('App\Departament')
+            ->withTimestamps();
+    }
+
     //establecimiento de la relacion de muchos a muchos con roles   
     public function roles()
     {
@@ -63,4 +73,9 @@ class User extends Authenticatable
         }
         return false;
     }
+    public function getRole(){
+        $object = ($this->roles()->first()['name']);
+        var_dump($object);die();
+    }
 }
+

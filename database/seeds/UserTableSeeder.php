@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Role;
+use App\Departament;
 
 class UserTableSeeder extends Seeder
 {
@@ -15,6 +16,8 @@ class UserTableSeeder extends Seeder
     {
         $role_user = Role::where('name', 'user')->first();
         $role_admin = Role::where('name', 'admin')->first();
+        $departament_info = Departament::where('name', 'informática')->first();
+        $departament_mark = Departament::where('name', 'marketing')->first();
         $user = new User();
         $user->name = 'User';
         $user->username='user';
@@ -22,6 +25,7 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('secret');
         $user->save();
         $user->roles()->attach($role_user);
+        $user->departaments()->attach($departament_info);
 
         $user = new User();
         $user->name = 'Admin';
@@ -30,6 +34,7 @@ class UserTableSeeder extends Seeder
         $user->password = bcrypt('secret');
         $user->save();
         $user->roles()->attach($role_admin);
+        $user->departaments()->attach($departament_mark);
 
         for($a = 1; $a<=30; $a++){
             $user = new User();
@@ -39,6 +44,7 @@ class UserTableSeeder extends Seeder
             $user->password = bcrypt('secret');
             $user->save();
             $user->roles()->attach($role_user);
+            $user->departaments()->attach($departament_mark);
         }
     }
 }

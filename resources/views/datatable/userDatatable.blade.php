@@ -9,6 +9,8 @@
                     <th class="all">Nombre</th>
                     <th class="all">Username</th>
                     <th>Email</th>
+                    <th>Rol</th>
+                    <th>Departamento</th>
                     <th>Creado</th>
                     <th>Modificado</th>
                     <th class="all">Acciones</th>
@@ -20,6 +22,8 @@
                     <td class="non_searchable"></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td class="non_searchable"></td>
                     <td></td>
                     <td class="non_searchable"></td>
                     <td class="non_searchable"></td>
@@ -63,6 +67,29 @@
                                 <label for="password-confirm" class="control-label">Confirmar Contraseña</label>
                                 <input id="password-confirm" type="password" value="" class="form-control" name="password_confirmation_update" >
                                 <span class="help-block" id="error"></span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="roles" class="control-label">{{ __('Roles') }}</label>
+
+                                <div class="col-md-6">
+                                    <select name="roles" id="rol_update" class="form-control"  required form="update-form">
+                                        @foreach($roles as $rol)
+                                        <option value="{{ $rol->name }}">{{ $rol->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="deparatamentos" class="control-label">{{ __('departamentos') }}</label>
+
+                                <div class="col-md-6">
+                                    <select name="departamentos" id="departamentos_update" class="form-control selectpicker" multiple="multiple" form="update-form">
+                                        @foreach($departamentos as $departamento)
+                                            <option value="{{ $departamento->name }}">{{ $departamento->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <input id="id_user" name="id_user_update" hidden value=""></input>
                             <div class="alert alert-warning margin-top" id="confirm_box" >

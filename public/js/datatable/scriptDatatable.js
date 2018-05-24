@@ -4,7 +4,7 @@
     var table = $('#users-table').DataTable({
 
         processing: true,
-        serverSide: true,
+        serverSide: false,
         autoWidth: false,
         responsive: true,
         language: {
@@ -37,6 +37,8 @@
             { data: 'name', name: 'name', responsivePriority: 2 },
             { data: 'username', name: 'username', responsivePriority: 2 },
             { data: 'email', name: 'email', responsivePriority: 3 },
+            { data: 'rol', name: 'rol', responsivePriority:3, searchable: false},
+            { data: 'depart', name: 'depart', responsivePriority:3, searchable: true},
             { data: 'created_at', name: 'created_at', responsivePriority: 5, orderable: true, searchable: false },
             { data: 'updated_at', name: 'updated_at', responsivePriority: 6, orderable: true, searchable: false },
             { data: 'action', name: 'action',responsivePriority: 4, orderable: false, searchable: false}
@@ -95,11 +97,13 @@
             var nombre = row.find("td").eq(1).html();
             var username = row.find("td").eq(2).html();
             var email = row.find("td").eq(3).html();
+            var rol = row.find("td").eq(4).html()
 
             $('#id_user').val(id);
             $('#name_update').val(nombre);
             $('#username_update').val(username);
             $('#email_update').val(email);
+            $('#rol_update').val(rol);
             $('#modal1_user').modal('show');
         })
 
@@ -109,13 +113,15 @@
                 name_update : {required : true, lettersonly: true},
                 username_update : "required",
                 email_update : {required:true, email:true},
-                password_confirmation_update : { equalTo :"#password_update"}
+                password_confirmation_update : { equalTo :"#password_update"},
+                roles:{ required:true}
             },
             messages: {
                 name_update: "Este campo no puede estar vacio o tener numeros",
                 username_update : "Este campo no puede estar vacio",
                 email_update: "Este campo no puede estar vacio y debe tener formato de email",
                 password_confirmation_update: "Las contraseñas no coinciden",
+                roles:"El usuario debe tener al menos un rol",
             },
             errorPlacement : function(error, element) { 
                 $(element).closest('.form-group').find('.help-block').html(error.html());
