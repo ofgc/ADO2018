@@ -60,7 +60,15 @@ class UserController extends Controller
      */
     public function show(request $request)
     {
-        var_dump($request->user()->departaments()->get());die();
+        $user= $request->user();
+        // $users = USER::with('departaments')->find($user->id);
+        $users = USER::with('departaments')->find($user->id);
+        // var_dump($users);die();
+
+
+        //////
+
+
         $departamentos = DB::table('departaments')->get();
         $roles = DB::table('roles')->get();
         if($request->user()->authorizeRoles([1])){
@@ -83,11 +91,16 @@ class UserController extends Controller
                 $object = ($user->roles()->first()['name']);
                 return $object;
             })
-            // ->addColumn('departament',function($user){
-                // $departament = ($user->departaments()['name']);
-                // var_dump($departament)
-                // return $depart;
-            // })
+            ->addColumn('departament',function($user){
+                $departamentos = "";
+                $users = USER::with('departaments')->find($user);
+                foreach($users as $user){
+                    foreach($user->departaments as $departaments){
+                        $departamentos = $departamentos." ".$departaments->name;
+                    }   
+                }
+                return $departamentos;
+            })
             ->editColumn('updated_at', function ($user) {
                 return $user->updated_at->format('m/d/Y');
             })
@@ -134,15 +147,17 @@ class UserController extends Controller
     {
         
         if($request->ajax()){
-            $password_update = bcrypt($request-> input('password_update'));
+            $password_update = $request-> input('password_update');
             $rol = $request->input('roles');
             $idUser = $request->input('id_user_update');
             $user = User::find($idUser);
             $user->name = $request->input('name_update');
             $user->username = $request->input('username_update');
             $user->email = $request->input('email_update');
+            $user->roles()->detach();
             $user->roles()->attach(Role::where('name', $rol)->first());
             if($password_update != "" || $password_update != null ){
+                $password_update = bcrypt($password_update);
                 $user->password = $password_update;
             }
             $user->save();

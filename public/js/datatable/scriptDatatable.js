@@ -38,7 +38,7 @@
             { data: 'username', name: 'username', responsivePriority: 2 },
             { data: 'email', name: 'email', responsivePriority: 3 },
             { data: 'rol', name: 'rol', responsivePriority:3, searchable: false},
-            { data: 'depart', name: 'depart', responsivePriority:3, searchable: true},
+            { data: 'departament', name: 'departament', responsivePriority:3, searchable: true},
             { data: 'created_at', name: 'created_at', responsivePriority: 5, orderable: true, searchable: false },
             { data: 'updated_at', name: 'updated_at', responsivePriority: 6, orderable: true, searchable: false },
             { data: 'action', name: 'action',responsivePriority: 4, orderable: false, searchable: false}
