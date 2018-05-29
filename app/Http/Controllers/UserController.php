@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\File;
 use App\User;
 use App\Role;
+use App\DepartamentUser; 
 use DB;
 use Illuminate\Support\Facades\Storage;
 use Yajra\Datatables\Datatables;
@@ -110,6 +111,9 @@ class UserController extends Controller
 
             ->make(true);
     }
+
+
+    
 
     public function deleteUser(Request $request)
     {

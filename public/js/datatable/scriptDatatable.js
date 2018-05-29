@@ -4,7 +4,7 @@
     var table = $('#users-table').DataTable({
 
         processing: true,
-        serverSide: false,
+        serverSide: true,
         autoWidth: false,
         responsive: true,
         language: {

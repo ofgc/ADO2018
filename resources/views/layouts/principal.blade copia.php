@@ -41,76 +41,57 @@
 
 </head>
 <body>
-
 	<div class="container-fluid" id="wrapper">
 		<div class="row">
+			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2 bg-faded sidebar-style-1">
+				<h1 class="site-title"><a href="index.html"><em class=""></em> ADO 2018</a></h1>
+				
+				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
+				
+				<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
+					<li class="nav-item"><a class="nav-link" href="{{('home')}}"><em class="fa fa-newspaper"></em> Dashboard <span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="{{('crearAdo')}}"><em class="fa fa-edit"></em> Crear ADO</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{('informes')}}"><em class="fa fa-clone"></em>Buscar ADO</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{('buscarAdo')}}"><em class="fa fa-clone"></em>Informes</a></li>
+					<li class="nav-item"><a class="nav-link" href="{{('graficos')}}"><em class="fa fa-bar-chart-o"></em> Gráficos</a></li>
+				</ul>
 
-			
-			<nav class="sidebar col-xs-12 col-sm-4 col-lg-3 col-xl-2 bg-faded ">
+				<h1 class="site-title"><a href="index.html"><em class=""></em> Rincón del usuario</a></h1>
+				
+				<a href="#menu-toggle" class="btn btn-default" id="menu-toggle"><em class="fa fa-bars"></em></a>
+				
+				<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
+					<li class="nav-item"><a class="nav-link" href="{{('profile')}}"><em class="fa fa-id-card"></em> Perfil de usuario <span class="sr-only">(current)</span></a></li>
+				</ul>
 
-				<div id="accordion">
-				  	<div class="card"> <!-- Inicio de Card 1 MENU ADO 2018-->
-					    <div class="card-header" id="headingOne">
-					      	<h1 class="site-title" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"><a href="#">		       
-					          ADO 2018				 
-					      </a></h1>
-					    </div>
+				@if(Auth::user()->hasAnyRole([1,2,3]))
+					<h1 class="site-title"><a href="index.html"><em class=""></em> Menu gestión</a></h1>
 
-					    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-					      <div  class="card-body">
-								<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
-									<li class="nav-item"><a class="nav-link" href="{{('home')}}"><em class="fa fa-newspaper"></em> Dashboard <span class="sr-only">(current)</span></a></li>
-									<li class="nav-item"><a class="nav-link" href="{{('crearAdo')}}"><em class="fa fa-edit"></em> Crear ADO</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{('informes')}}"><em class="fa fa-clone"></em> Buscar ADO</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{('buscarAdo')}}"><em class="fa fa-clone"></em> Informes</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{('graficos')}}"><em class="fa fa-bar-chart-o"></em> Gráficos</a></li>
-								</ul>
-					      </div>
-					    </div>
+					<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
+						<li class="nav-item"><a class="nav-link" href="{{('register')}}"><em class="fa fa-user-circle"></em>Alta descripción</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('gestionUsers')}}"><em class="fa fa-users"></em>Gestión descripción</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('registrarRoles')}}"><em class="fa fa-th-large"></em>Gestión presupuesto</a></li>
+					</ul>
+				@endif
 
-				  	</div> <!-- fin de Card 1-->
+				@if(Auth::user()->hasAnyRole([1]))
+					<h1 class="site-title"><a href="index.html"><em class=""></em> Menu Administrador</a></h1>
 
-				  	@if(Auth::user()->hasAnyRole([1,2,3]))
-					<div class="card"> <!-- Inicio de Card 2 MENU GESTION-->
-					    <div class="card-header" id="headingTwo">
-					      	<h1 class="site-title " data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><a href="#">       
-					           Menu gestión				 
-					      </a></h1>
-					    </div>
+					<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
+						<li class="nav-item"><a class="nav-link" href="{{('register')}}"><em class="fa fa-user-circle"></em> Dar Alta Usuario</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('gestionUsers')}}"><em class="fa fa-users"></em> Gestión Usuario</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('registrarRoles')}}"><em class="fa fa-th-large"></em> Dar Rol de Alta</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{('gestionRoles')}}"><em class="fa fa-th-list"></em>Gestión Roles</a></li>
+					</ul>
+				@endif
 
-					    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-					      <div id = 'Midiv' class="card-body">
-								<ul id = 'Miul' class="nav nav-pills flex-column sidebar-nav margin_left_menu">
-									<li id = 'Miil' class="nav-item"><a class="nav-link" href="#"><em class="fa fa-user-circle"></em> Alta descripción</a></li>
-									<li class="nav-item"><a class="nav-link" href="#"><em class="fa fa-users"></em> descripción</a></li>
-									<li class="nav-item"><a class="nav-link" href="#"><em class="fa fa-th-large"></em> presupuesto</a></li>
-								</ul>
-					      </div>
-					    </div>
-					</div> <!-- fin de Card 2-->
-				  	@endif 
-					<div class="card">
-    					<div class="card-header" id="headingThree">
-				      		<h1 class="site-title " data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><a href="#">       
-					           Menu Administrador				 
-					      	</a></h1>
-    					</div>
-					    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-					      <div class="card-body">
-								<ul class="nav nav-pills flex-column sidebar-nav margin_left_menu">
-									<li class="nav-item"><a class="nav-link" href="{{('register')}}"><em class="fa fa-user-circle"></em> Dar Alta Usuario</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{('gestionUsers')}}"><em class="fa fa-users"></em> Gestión Usuario</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{('registrarRoles')}}"><em class="fa fa-th-large"></em> Dar Rol de Alta</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{('gestionRoles')}}"><em class="fa fa-th-list"></em>Gestión Roles</a></li>
-								</ul>
-					      </div>
-				    	</div>
-				  	</div>
-
-				</div>
-
-
+				<a class="logout-button dropdown-item" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                 document.getElementById('logout-form').submit();">
+                   <em class="fa fa-power-off mr-1"></em>  {{ __('Cerrar Sesión') }}
+                </a>
 			</nav>
+			
 			<main class="col-xs-12 col-sm-8 offset-sm-4 col-lg-9 offset-lg-3 col-xl-10 offset-xl-2 pt-3 pl-4">
 				<header class="page-header row justify-center position_fixed">
 					<div class="col-md-6 col-lg-8" >
@@ -150,9 +131,7 @@
 				<div class="container">
 				@yield('content')
 				</div>
-			</main>				
-			
-
+			</main>	
 		</div>
 	</div>
 

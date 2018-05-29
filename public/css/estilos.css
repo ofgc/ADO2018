@@ -43,3 +43,10 @@
 .margin_left_menu{
     margin-left: 5%;
 }
+.card {
+    background-color: transparent;
+}
+.active{
+    background-color:lightblue;
+}
+

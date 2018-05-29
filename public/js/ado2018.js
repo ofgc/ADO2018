@@ -2,6 +2,21 @@ $(document).ready(function(){
 	$("#alert_fail").hide();
 	$("#alert_success").hide();
 
+	var cambio = false;
+    $('.nav li a').each(function(index) {
+    	if(this.href.trim() == window.location){
+	    	//var padre = $( this ).parents(':eq(3)').attr('id');
+    		//console.log('PADREEEE ' + padre);
+    		$(this).parents(':eq(3)').addClass("show");
+            $(this).parent().addClass("active");
+            cambio = true;
+        }
+    });
+    if(!cambio){
+        $('.nav li:first').addClass("active");
+    }
+
+
 	$('#departamentos_update').multiselect({});
 
 	$("#images_profile").fileinput({
